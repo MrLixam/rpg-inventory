@@ -15,11 +15,13 @@ class PlayableChara
 		std::string _name;
 		Date birth;
 		Item* _equipped;
-		Inventory* _inventory;
+		Inventory _inventory;
 	public:
 		PlayableChara(void);
 		PlayableChara(std::string origin, std::string name, dVal bYear, dVal bMonth, dVal bDay);
 		~PlayableChara(void);
+		PlayableChara(const PlayableChara& copy);
+		PlayableChara& operator=(const PlayableChara& copy);
 };
 
 #endif

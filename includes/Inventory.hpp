@@ -10,8 +10,8 @@ class Inventory
 		std::vector<Item *> _inventory;
 	public:
 		Inventory(void);
-		Inventory(size_t size);
 		Inventory(const Inventory& copy);
+		~Inventory(void);
 		Inventory& operator=(const Inventory& copy);
 		Item& operator[](size_t index);
 		const Item& operator[](size_t index) const;
@@ -33,8 +33,23 @@ class Inventory
 		reverse_iterator crbegin(void) const {return _inventory.rbegin();};
 		reverse_iterator crend(void) const {return _inventory.rend();};
 
-		void push_back(Item& value);
+		void push_back(Item* value);
 		std::vector<Item *>::size_type size(void) const {return _inventory.size();};
+
+		class OutOfBoundsException: public std::exception
+		{
+			virtual const char * what() const throw()
+			{
+				return ("Index out of bounds");
+			}
+		};
+		class UniqueItemException: public std::exception
+		{
+			virtual const char * what() const throw()
+			{
+				return ("Item already in inventory");
+			}
+		};
 };
 
 #endif
